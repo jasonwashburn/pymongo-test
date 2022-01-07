@@ -1,3 +1,6 @@
+tasks:
+  - name: Initalize Script
+    init: pip install black mypy flake8 isort rich pymongo
 
 vscode:
   extensions:
