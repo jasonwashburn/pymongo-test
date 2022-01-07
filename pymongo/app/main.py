@@ -1,3 +1,4 @@
+import itertools
 import os
 import random
 import string
@@ -41,7 +42,7 @@ class ModelDataSiteParam:
         return result
 
 
-def generate_records(num_records: int) -> List:
+def generate_single_records(num_records: int) -> List:
     rprint(f"Generating {num_records} records...")
     start = time.perf_counter()
     generated_records = []
@@ -75,7 +76,22 @@ def main():
     num_ua_params = int(input("Enter number of upper air params per station: "))
     num_ua_levels = int(input("Enter number of upper air levels per param: "))
     num_records = num_stations * (num_sfc_params + (num_ua_params * num_ua_levels))
-    generated_records = generate_records(num_records)
+    generated_records = generate_single_records(num_records)
+
+    rprint(f"(insert_many) - Inserting {len(generated_records)} into mongo database...")
+    start = time.perf_counter()
+    insert_result = collection.insert_many(generated_records)
+    rprint(f"Inserted records in {time.perf_counter() - start:.2f} seconds.")
+
+    # rprint(f"(insert_one) - Inserting {len(generated_records)} into mongo database...")
+    # start = time.perf_counter()
+    # iter_obj = itertools.cycle(generated_records)
+    # print(type(iter_obj))
+    # count = 0
+    # while count < len(generated_records):
+    #     collection.insert_one(next(iter_obj))
+    #     count += 1
+    # rprint(f"Inserted records in {time.perf_counter() - start:.2f} seconds.")
 
     return None
 
