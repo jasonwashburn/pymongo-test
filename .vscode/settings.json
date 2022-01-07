@@ -1,0 +1,9 @@
+{
+    "python.linting.pylintEnabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.linting.enabled": true,
+    "editor.formatOnSave": true,
+    "python.sortImports.path": "isort",
+    "python.formatting.provider": "black",
+    "python.analysis.typeCheckingMode": "basic",
+}

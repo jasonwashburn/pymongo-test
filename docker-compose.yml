@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  mongodb:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD
+    volumes:
+      - mongo-database:/data/db
+    expose:
+      - 27017
+    restart: unless-stopped
+
+  pymongo:
+    container_name: pymongo
+    build:
+      context: pymongo/.
+      dockerfile: Dockerfile
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD
+
+volumes:
+  mongo-database:
