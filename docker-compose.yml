@@ -1,6 +1,7 @@
 version: "3.8"
 services:
   mongodb:
+    container_name: mongo
     image: mongo
     environment:
       - MONGO_INITDB_ROOT_USERNAME
@@ -13,6 +14,7 @@ services:
 
   pymongo:
     container_name: pymongo
+    image: pymongo-test
     build:
       context: pymongo/.
       dockerfile: Dockerfile
@@ -21,4 +23,4 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD
 
 volumes:
-  mongo-database:
+  mongo-database: null
